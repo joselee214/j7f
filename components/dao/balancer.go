@@ -2,7 +2,7 @@ package dao
 
 import (
 	"database/sql"
-	. "go.7yes.com/j7f/components/dao/errors"
+	. "github.com/joselee214/j7f/components/dao/errors"
 	"math/rand"
 	"time"
 )

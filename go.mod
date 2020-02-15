@@ -1,4 +1,4 @@
-module go.7yes.com/j7f
+module github.com/joselee214/j7f
 
 go 1.13
 

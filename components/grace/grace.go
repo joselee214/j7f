@@ -2,7 +2,7 @@ package grace
 
 import (
 	flag "github.com/spf13/pflag"
-	"go.7yes.com/j7f/internal/log"
+	"github.com/joselee214/j7f/internal/log"
 	"net"
 	"os"
 	"sync"

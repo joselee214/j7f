@@ -2,7 +2,7 @@ package errors
 
 import (
 	"fmt"
-	"go.7yes.com/j7f/proto/common"
+	"github.com/joselee214/j7f/proto/common"
 	"google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 	"io"

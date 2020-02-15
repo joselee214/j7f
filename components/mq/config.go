@@ -3,7 +3,7 @@ package mq
 import (
 	"crypto/tls"
 	"github.com/nsqio/go-nsq"
-	"go.7yes.com/j7f/util"
+	"github.com/joselee214/j7f/util"
 	"net"
 	"time"
 )

@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 	"github.com/gin-gonic/gin"
-	"go.7yes.com/j7f/components/log"
-	"go.7yes.com/j7f/components/service_register"
+	"github.com/joselee214/j7f/components/log"
+	"github.com/joselee214/j7f/components/service_register"
 	"go.uber.org/zap"
 	"net"
 	"net/http"

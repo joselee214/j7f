@@ -2,9 +2,9 @@ package server
 
 import (
 	"context"
-	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/components/log"
-	"go.7yes.com/j7f/proto/common"
+	"github.com/joselee214/j7f/components/errors"
+	"github.com/joselee214/j7f/components/log"
+	"github.com/joselee214/j7f/proto/common"
 	"go.uber.org/ratelimit"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"

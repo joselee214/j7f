@@ -2,7 +2,7 @@ package shard
 
 import (
 	"fmt"
-	. "go.7yes.com/j7f/components/dao/errors"
+	. "github.com/joselee214/j7f/components/dao/errors"
 	"hash/crc32"
 	"strconv"
 	"time"

@@ -3,7 +3,7 @@ package grace
 import (
 	"errors"
 	"fmt"
-	"go.7yes.com/j7f/internal/log"
+	"github.com/joselee214/j7f/internal/log"
 	"os"
 	"os/exec"
 	"os/signal"

@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/grpc-ecosystem/go-grpc-middleware"
-	"go.7yes.com/j7f/components/service_register"
+	"github.com/joselee214/j7f/components/service_register"
 	"google.golang.org/grpc"
 	"net"
 )

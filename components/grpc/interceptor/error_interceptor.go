@@ -2,7 +2,7 @@ package interceptor
 
 import (
 	"context"
-	"go.7yes.com/j7f/components/log"
+	"github.com/joselee214/j7f/components/log"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"

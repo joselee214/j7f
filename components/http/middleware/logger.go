@@ -3,7 +3,7 @@ package middleware
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go.7yes.com/j7f/components/log"
+	"github.com/joselee214/j7f/components/log"
 	"time"
 )
 

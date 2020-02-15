@@ -3,8 +3,8 @@ package client
 import (
 	"context"
 	"github.com/rs/xid"
-	"go.7yes.com/j7f/components/grpc/server"
-	"go.7yes.com/j7f/components/log"
+	"github.com/joselee214/j7f/components/grpc/server"
+	"github.com/joselee214/j7f/components/log"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"google.golang.org/grpc"

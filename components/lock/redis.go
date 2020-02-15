@@ -2,8 +2,8 @@ package lock
 
 import (
 	"context"
-	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/lib/gopkg.in/redsync.v1"
+	"github.com/joselee214/j7f/components/errors"
+	"github.com/joselee214/j7f/lib/gopkg.in/redsync.v1"
 	"sync"
 	"sync/atomic"
 	"time"
