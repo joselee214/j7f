@@ -17,7 +17,7 @@ type Config struct {
 }
 
 func New(c *Config) *gomail.Dialer {
-	d := gomail.NewPlainDialer(c.SmtpAddr, c.Port, c.User, c.Password)
+	d := gomail.NewDialer(c.SmtpAddr, c.Port, c.User, c.Password)
 	if c.TlsConfig != nil {
 		d.TLSConfig = c.TlsConfig
 	}
