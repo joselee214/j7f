@@ -24,6 +24,8 @@ type DBConfig struct {
 	MaxIdleConns int
 	MaxLifetime	int
 
+	PingTickerTime	int
+
 	Master *NodeConfig
 	Slave  []*NodeConfig
 
@@ -124,7 +126,7 @@ func (n *Node) parseSlave() (err error) {
 
 // check the node alive
 func (n *Node) CheckNode(checkHandler checkHandler) {
-	t := time.NewTicker(30 * time.Second)
+	t := time.NewTicker( time.Duration(n.Cfg.PingTickerTime) * time.Second)
 
 	for {
 		<-t.C
