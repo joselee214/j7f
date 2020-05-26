@@ -8,8 +8,8 @@ import (
 	"go.uber.org/zap"
 	"net"
 	"net/http"
-	"os"
-	"os/signal"
+	//"os"
+	//"os/signal"
 	"time"
 )
 
@@ -146,9 +146,9 @@ func (g *HttpServer) GetListener() *net.TCPListener {
 }
 
 func (g *HttpServer) shutdown(srv *http.Server) {
-	quit := make(chan os.Signal)
-	signal.Notify(quit, os.Interrupt)
-	<-quit
+	//quit := make(chan os.Signal)
+	//signal.Notify(quit, os.Interrupt)
+	//<-quit
 
 	g.l.Logger.Debug("Shutdown Server ...")
 

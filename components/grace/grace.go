@@ -60,6 +60,7 @@ func NewServer(grace graceListener) (srv *Server) {
 		isChild:       isChild,
 		wg:            sync.WaitGroup{},
 		log:           log.NewLoggerDefault(),
+		runing:			false,
 	}
 	runningServers := make(map[string]*Server)
 	runningServers[grace.GetAddress().String()] = srv
