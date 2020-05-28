@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
-	"sync"
+	//"sync"
 	"syscall"
 	//"time"
 )
@@ -19,7 +19,7 @@ type Server struct {
 	sigChan       chan os.Signal
 	SignalHooks   map[int]map[os.Signal][]func()
 
-	wg sync.WaitGroup
+	//wg sync.WaitGroup
 
 	isChild bool
 
@@ -68,6 +68,9 @@ func (srv *Server) handleSignals() {
 			break
 		}
 		sig = <-srv.sigChan
+
+		srv.log.Infof(" => handleSignals Received %v",sig)
+
 		srv.signalHooks(PreSignal, sig)
 
 		switch sig {

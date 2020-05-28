@@ -58,7 +58,7 @@ func NewServer(grace graceListener) (srv *Server) {
 		GraceListener: grace,
 		sigChan:       make(chan os.Signal),
 		isChild:       isChild,
-		wg:            sync.WaitGroup{},
+		//wg:            sync.WaitGroup{},
 		log:           log.NewLoggerDefault(),
 		runing:			false,
 	}
