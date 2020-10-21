@@ -18,6 +18,10 @@ type RegisterFunc interface {
 }
 
 func NewRegisterOpts(s *Service, registerFunc RegisterFunc) *RegisterOpts {
+	//var nr *RegisterOpts = new(RegisterOpts)
+	//nr.RegisterData = s
+	//nr.RegisterFunc = registerFunc
+	//return nr
 	return &RegisterOpts{
 		RegisterData: s,
 		RegisterFunc: registerFunc,

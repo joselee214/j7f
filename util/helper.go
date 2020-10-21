@@ -38,5 +38,6 @@ func GetLocalIps() []string {
 			}
 		}
 	}
+	//fmt.Println(ips)
 	return ips
 }

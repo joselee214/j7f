@@ -10,6 +10,8 @@ type Node struct {
 	Address  string                  `json:"address"`
 	Port     int                     `json:"port"`
 	Metadata map[string]string       `json:"metadata"`
+	Ip		 string					 `json:"ip"`
+	Version	 string					 `json:"version"`
 }
 
 type ServiceInfo struct {
@@ -29,13 +31,15 @@ type ServerInfo struct {
 	Metadata interface{}
 }
 
-func NewNode(nodeId, address string, port int, metadata map[string]string) *Node {
+func NewNode(nodeId, address, ip, version string, port int, metadata map[string]string) *Node {
 	return &Node{
 		NodeId:   nodeId,
 		Services: make(map[string]*ServiceInfo),
 		Address:  address,
 		Port:     port,
 		Metadata: metadata,
+		Ip:		  ip,
+		Version:  version,
 	}
 }
 
