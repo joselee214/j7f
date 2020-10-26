@@ -12,9 +12,14 @@ type Controller struct {
 	Data interface{}
 }
 
-func (this *Controller) AjaxData(ctx *gin.Context) {
+func (this *Controller) ResponseSuccess(ctx *gin.Context) {
 	ResultOk(ctx, this.Data)
 }
+
+func (this *Controller) ResponseError(ctx *gin.Context,err interface{}) {
+	ResultFail(ctx, err)
+}
+
 func (this *Controller) Redirect(ctx *gin.Context,uri string) {
 	ctx.Redirect(302,uri)
 }

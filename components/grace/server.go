@@ -169,13 +169,15 @@ func (srv *Server) fork() (err error) {
 	var args []string
 	if len(os.Args) > 1 {
 		for _, arg := range os.Args[1:] {
-			if arg == "-graceful" {
+			if arg == "--graceful" {
 				break
 			}
 			args = append(args, arg)
 		}
 	}
-	args = append(args, "-graceful")
+	args = append(args, "--graceful")
+
+	srv.log.Info(" ==> ",path,args)
 
 	cmd := exec.Command(path, args...)
 	cmd.Stdout = os.Stdout

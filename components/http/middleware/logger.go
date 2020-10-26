@@ -23,14 +23,14 @@ func Logger(l *log.Logger) gin.HandlerFunc {
 		clientIP := c.ClientIP()
 		method := c.Request.Method
 		statusCode := c.Writer.Status()
-		params, _ := c.Get("raw-data")
+		//rawdata, _ := c.Get("raw-data")
 		l.Info(fmt.Sprintf("Common:%3d | %v | %s |  %s  %s "+
 			"Headers:%+v "+
-			"Params:%+v "+
+			//"RawData:%+v "+
 			"Errors:%s`",
 			statusCode, latency, clientIP, method, path,
 			c.GetHeader("Common-Params"),
-			params,
+			//rawdata,
 			c.Errors.String(),
 		))
 	}
