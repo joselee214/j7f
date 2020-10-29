@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	//"sync"
 	"syscall"
-	//"time"
+	"time"
 )
 
 type Server struct {
@@ -32,14 +32,14 @@ func (srv *Server) ListenAndServe() (err error) {
 	srv.runing = true
 	go srv.handleSignals()
 
-	srv.log.Info( " =========runing as isChild : ",srv.isChild )
+	srv.log.Info( " => server run as child : ",srv.isChild )
 
 	if srv.isChild {
 		process, err := os.FindProcess(os.Getppid())
 		if err != nil {
 			return err
 		}
-		err = process.Signal(os.Interrupt)
+		err = process.Signal(syscall.SIGTERM)  //os.Interrupt
 		if err != nil {
 			return err
 		}
@@ -82,8 +82,12 @@ func (srv *Server) handleSignals() {
 				srv.log.Errorf("Fork err: %s", err)
 			}
 		case syscall.SIGINT:
+			DefaultTimeout = 0
 			srv.shutdown()
 		case syscall.SIGTERM:
+			srv.shutdown()
+		case syscall.SIGKILL:
+			DefaultTimeout = 0
 			srv.shutdown()
 		default:
 			srv.log.Infof("Received %v: nothing i care about...\n", sig)
@@ -104,29 +108,53 @@ func (srv *Server) signalHooks(ppFlag int, sig os.Signal) {
 
 func (srv *Server) shutdown() {
 
-	//if DefaultTimeout >= 0 {
-	//	go srv.serverTimeout(DefaultTimeout)
-	//}
+	if srv.runing==false {
+		return
+	}
+	srv.runing = false
 
 	if srv.Rr.RegisterData != nil {
 		srv.Rr.DeRegister()
 	}
 
-	err := srv.Close()
+	if DefaultTimeout > 0 {
+		time.AfterFunc( DefaultTimeout , func() {
+			srv.shutClose()
+		}  )
+	} else {
+		srv.shutClose()
+	}
+	//srv.serverTimeout(DefaultTimeout)
+	//	srv.wg.Done()
+	//else {
+	//	srv.wg.Done()
+	//}
+}
 
+func (srv *Server) shutClose(){
+	err := srv.Close()
 	if err != nil {
 		srv.log.Errorf("%d Listener.Close() error:", syscall.Getpid(), err)
 	} else {
 		srv.log.Infof(" => Server %s closed / pid %d ", srv.GraceListener.GetAddress().String() , syscall.Getpid() )
 	}
-
-	//srv.serverTimeout(DefaultTimeout)
-//	srv.wg.Done()
-
-	//else {
-	//	srv.wg.Done()
-	//}
 }
+
+//func (srv *Server) serverTimeout(d time.Duration) {
+//	defer func() {
+//		if r := recover(); r != nil {
+//			srv.log.Infof("WaitGroup at 0 ,%v", r)
+//		}
+//	}()
+//
+//	for {
+//		if srv.runing == false {
+//			break
+//		}
+//		srv.wg.Done()
+//		time.Sleep( 200 * time.Millisecond) //交出携程控制权
+//	}
+//}
 
 func (srv *Server) Close() (err error) {
 	defer func() {
@@ -191,23 +219,6 @@ func (srv *Server) fork() (err error) {
 	}
 	return
 }
-
-//func (srv *Server) serverTimeout(d time.Duration) {
-//	defer func() {
-//		if r := recover(); r != nil {
-//			srv.log.Infof("WaitGroup at 0 ,%v", r)
-//		}
-//	}()
-//
-//	for {
-//		if srv.runing == false {
-//			break
-//		}
-//		srv.wg.Done()
-//		time.Sleep( 200 * time.Millisecond) //交出携程控制权
-//	}
-//
-//}
 
 // RegisterSignalHook registers a function to be run PreSignal or PostSignal for a given signal.
 func (srv *Server) RegisterSignalHook(ppFlag int, sig os.Signal, f func()) (err error) {

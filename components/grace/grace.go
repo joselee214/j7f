@@ -48,6 +48,7 @@ func init() {
 		syscall.SIGHUP,
 		syscall.SIGINT,
 		syscall.SIGTERM,
+		syscall.SIGKILL,
 	}
 }
 func NewServer(grace graceListener) (srv *Server) {
