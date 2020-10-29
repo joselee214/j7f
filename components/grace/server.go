@@ -32,6 +32,8 @@ func (srv *Server) ListenAndServe() (err error) {
 	srv.runing = true
 	go srv.handleSignals()
 
+	srv.log.Info( " =========runing as isChild : ",srv.isChild )
+
 	if srv.isChild {
 		process, err := os.FindProcess(os.Getppid())
 		if err != nil {
@@ -170,14 +172,14 @@ func (srv *Server) fork() (err error) {
 	if len(os.Args) > 1 {
 		for _, arg := range os.Args[1:] {
 			if arg == "--graceful" {
-				break
+				continue
 			}
 			args = append(args, arg)
 		}
 	}
 	args = append(args, "--graceful")
 
-	srv.log.Info(" ==> ",path,args)
+	srv.log.Info(" ==> fork run : ",path,args)
 
 	cmd := exec.Command(path, args...)
 	cmd.Stdout = os.Stdout

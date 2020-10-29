@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	_ "github.com/gogf/greuse"
 	"github.com/gin-gonic/gin"
 	"github.com/joselee214/j7f/components/log"
 	"github.com/joselee214/j7f/components/service_register"
@@ -38,6 +39,15 @@ func NewHttpServer(addr *net.TCPAddr, log *log.Logger, env string) (*HttpServer,
 	g.addr = addr
 
 	g.lis, err = net.ListenTCP("tcp", g.addr)
+
+	//gs,e11 := greuse.Listen("tcp", g.addr.String())
+	//if e11 != nil {
+	//	return nil, err
+	//}
+
+	//g.lis = &gs
+
+
 	if err != nil {
 		return nil, err
 	}
@@ -94,6 +104,7 @@ func (g *HttpServer) NewServ() error {
 		Addr:    g.addr.String(),
 		Handler: g.r,
 	}
+
 	return nil
 }
 
