@@ -55,9 +55,9 @@ func NewHttpServer(addr *net.TCPAddr, log *log.Logger, env string) (*HttpServer,
 	gin.DefaultWriter = log
 	gin.DefaultErrorWriter = log
 
-	//if env == "prod" {
+	if env == "prod" {
 		gin.SetMode(gin.ReleaseMode)
-	//}
+	}
 
 	g.r = gin.New()
 	g.l = log
